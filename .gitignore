@@ -3,8 +3,6 @@ node_modules/
 
 # Environment variables (never commit)
 .env
-.env.*
-!.env.example
 
 # Logs
 *.log

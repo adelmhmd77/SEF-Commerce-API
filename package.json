@@ -35,5 +35,8 @@
     "nodemailer": "^10.2.1",
     "slugify": "^1.6.9",
     "stripe": "^23.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
