@@ -6,7 +6,14 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 
 const connectDB = require('./DB/connection');
+
+const dns = require("node:dns")
 const { errorHandler, notFound } = require('./middleware/errorHandler');
+
+dns.setServers([
+  "8.8.8.8",
+  "8.8.4.4"
+]);
 
 const app = express();
 
