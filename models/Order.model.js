@@ -128,10 +128,12 @@ const orderSchema = new Schema(
       default: 0,
       min: [0, 'Total price cannot be negative'],
     },
-    fees: {
+    // Note: This fee is specifically for Cash on Delivery (COD) charges.
+    // Default value is 0 as per the task requirements.
+    codFee: {
       type: Number,
       default: 0,
-      min: [0, 'Fees cannot be negative'],
+      min: [0, 'COD Fee cannot be negative'],
     },
     status: {
       type: String,
@@ -157,6 +159,11 @@ const orderSchema = new Schema(
   },
   { timestamps: true }
 );
+
+// Pricing is calculated by the order controller in Phase 4, not by this model:
+// - shippingFee = 0 when subtotal >= 1000 EGP; otherwise shippingFee = 50 EGP.
+// - tax = 14% of subtotal.
+// - totalPrice = subtotal + shippingFee + tax - discount.
 
 orderSchema.index({ createdAt: 1 });
 
