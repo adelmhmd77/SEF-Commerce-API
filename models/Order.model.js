@@ -128,8 +128,7 @@ const orderSchema = new Schema(
       default: 0,
       min: [0, 'Total price cannot be negative'],
     },
-    // Note: This fee is specifically for Cash on Delivery (COD) charges.
-    // Default value is 0 as per the task requirements.
+ 
     codFee: {
       type: Number,
       default: 0,
