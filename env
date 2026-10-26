@@ -1,0 +1,20 @@
+PORT=5000
+NODE_ENV=development
+
+# MongoDB Atlas connection string
+MONGO_URI=mongodb+srv://adelmohammedsalem22_db_user:v7dGcDwIv8wnSwWO@cluster0.azifvgg.mongodb.net/
+
+# JWT
+JWT_SECRET=b646dc0ed3c58495447e10926afbc86db536f121ae8b3f8a221e7d63b878293c8bb7c63983ef7cc259de3632829b717e7641fe2e0c36f556086234f87aa67a78
+JWT_EXPIRE=30d
+
+# Cloudinary
+CLOUDINARY_CLOUD_NAME=nc5uph6a
+CLOUDINARY_API_KEY=662783952273758
+CLOUDINARY_API_SECRET=esoXnvtNXF6-alBBXwaaL6C4MCg
+
+# Email (SMTP)
+EMAIL_HOST=sandbox.smtp.mailtrap.io
+EMAIL_PORT=2525
+EMAIL_USER=c3a208ef9a3a6d
+EMAIL_PASS=01a45386eb573c
