@@ -38,7 +38,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       select: false,
       required: true,
-      trim: true,
       minlength: 6,
     },
     phone: {
@@ -64,6 +63,7 @@ const userSchema = new mongoose.Schema(
     },
     resetPasswordToken: {
       type: String,
+      select: false,
     },
     resetPasswordExpire: {
       type: Date,
@@ -76,9 +76,7 @@ const userSchema = new mongoose.Schema(
 //Hash -->register/update(findById,save())
 //==============
 userSchema.pre("save", async function () {
-  console.log("hash") //save word--> call this function
   if (!this.isModified("password")) { //field name
-    console.log("passwor not changed") 
     return;
   }
   this.password = await bcrypt.hash(this.password, 10);
@@ -88,7 +86,6 @@ userSchema.pre("save", async function () {
 //compare-->login
 //============
 userSchema.methods.comparePassword = async function (loginpassword) {
-  console.log("compare")
   return await bcrypt.compare(loginpassword, this.password);
 };
 

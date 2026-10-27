@@ -60,6 +60,7 @@ async function run() {
     await invalidDoc.validate();
     assert.fail('Expected zero images to fail validation');
   } catch (err) {
+    assert.ok(err.errors?.images, 'Expected zero images to fail validation');
     console.log(`✓ Zero images failed validation: "${err.errors?.images?.message || err.message}"`);
   }
 
@@ -69,6 +70,7 @@ async function run() {
     await invalidDoc.validate();
     assert.fail('Expected negative price to fail validation');
   } catch (err) {
+    assert.ok(err.errors?.price, 'Expected negative price to fail validation');
     console.log(`✓ Negative price failed validation: "${err.errors?.price?.message || err.message}"`);
   }
 
@@ -78,6 +80,7 @@ async function run() {
     await invalidDoc.validate();
     assert.fail('Expected negative stock to fail validation');
   } catch (err) {
+    assert.ok(err.errors?.stock, 'Expected negative stock to fail validation');
     console.log(`✓ Negative stock failed validation: "${err.errors?.stock?.message || err.message}"`);
   }
   console.log('PASS: All invalid inputs rejected by schema validations.');
