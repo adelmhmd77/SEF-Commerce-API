@@ -1,131 +1,113 @@
-# SEF-Commerce-API
-A Back-End RESTFUL API bulit for E-Commerce platform using Node.js , Express.js , MongoDB , Mongoose , JWT , bcryptjs , Cloudinary , Multer 
+# SEF Commerce API
 
-- 
+A full-featured RESTful e-commerce API built with Node.js, Express and MongoDB. It covers the whole life of an online store: user registration with email OTP, product management with image uploads, a smart shopping cart with coupons and stock handling, orders with online payments, and an admin dashboard with real statistics.
 
-## TECH Stack
+It is built by an 11-member team as part of the **SEF Academy** 4-week backend training program.
 
-**runtime environment** Node.js
-**Web framework**Express.js 
-**NoSQL document database**MongoDB
-**Stateless authentication tokens**JWT
-**object document mapper**Mongoose
-**Secure password hashing**bcryptjs
-**Cloud-based image storage and delivery** Cloudinary
-**Middleware for handling multipart/form-data (file uploads)**Multer
-**Email sendin**Nodemailer
-**Auto-generate URL-friendly slugs from product names**Slugify
-**Load environment variables from .env file**dotenv
-**Cross-Origin Resource Sharing middleware**cors
-**For make validation**JOI
-**For manage the all requests**Morgan
--
+## About the Project
 
-### Folder structure
-///
+The goal is to build a production-style backend from scratch and practice the tools and patterns used in real Node.js projects: REST API design, MongoDB schema design, authentication and authorization, file uploads, atomic database operations, online payments, automated emails and aggregation-based analytics.
+
+## What the API Does
+
+- **Authentication and roles:** JWT login, bcrypt password hashing, email verification by OTP, password reset, and role-based access (`customer` and `admin`).
+- **Products:** full CRUD with image upload to Cloudinary, auto-generated slugs, reviews with an automatic average rating, and advanced search, filtering and sorting.
+- **Smart cart:** stock is reserved when an item is added and returned when it is removed. Totals are computed on the fly, and coupons are supported.
+- **Wishlist:** one wishlist per user with full product details.
+- **Orders and payments:** orders are created inside a Mongoose transaction, so a failed step rolls everything back. Payment is cash or online through Stripe, with webhooks.
+- **Automated emails:** OTP, order confirmation and order status updates through Nodemailer.
+- **Admin dashboard:** revenue, order counts, top products, daily revenue and customer totals using MongoDB aggregation pipelines.
+
+## Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| Node.js | Server-side JavaScript runtime |
+| Express | Routing, middleware and error handling |
+| MongoDB and Mongoose | Database, schemas, validation, hooks and methods |
+| JWT and bcryptjs | Authentication tokens and password hashing |
+| Cloudinary and Multer | Image storage and file uploads |
+| Stripe | Online payments and webhooks |
+| Nodemailer | Transactional emails |
+| Joi | Request validation |
+| Slugify | URL-friendly product slugs |
+| dotenv, cors, cookie-parser, morgan | Configuration, CORS, cookies and request logging |
+| Vercel | Deployment |
+
+## Architecture
+
+The project follows the MVC pattern with a clear separation between layers.
+
+```
 SEF-Commerce-API/
-├── config/          →  Cloudinary setup 
-├──models/    →  Mongoose schemas and models 
-  ├──Cart.model.js
-  ├──Order.model.js
-  ├──OTP.model.js
-  ├──Product.model.js
-  ├──User.model.js
-  ├──Wishlist.model.js
-├──node_modules
-├── validation/           →  using joi create the files 
-├──.env        →  all environment variables 
-├──index.js     →  App entry point 
-├──README.md
-├──vercel.json      →   handle the api deploy to vercel 
-├── controllers/     →  Business logic for every resource 
-├── DB/     →  Database connection 
-├── routes/          →  Express route definitions 
-├── middleware/       →  Auth guard, role check, upload, error handler , validate
- ├── utils/           →  sendEmail, uploadToCloudinary, 
- ├── validation/           →  using joi create the files 
- 
--
+├── DB/               # MongoDB connection
+├── config/           # Cloudinary setup
+├── controllers/      # Business logic for every resource
+├── middleware/       # Auth guard, role check, upload, error handler, validation
+├── models/           # User, Product, Order, Cart, Wishlist, OTP
+├── routes/           # Express route definitions
+├── utils/            # Email sending, Cloudinary upload, Joi schemas
+├── docs/             # Postman collection
+└── index.js          # App entry point
+```
 
-## Getting Started
-1. git clone https://github.com/adelmhmd77/SEF-Commerce-API.git
-2. cd SEF-Commerce-API
-3. git checkout dev
-4. git pull origin dev
-5. npm install
-6. cp .env.example .env
-7. npm run dev
+### Database Models
 
--
+| Model | What it stores |
+|---|---|
+| User | Customers and admins, with hashed passwords, addresses and email verification status |
+| OTP | Temporary verification codes that expire automatically |
+| Product | Product details, images, reviews, average rating and an auto-generated slug |
+| Cart | One cart per user, with items, an applied coupon and totals computed on the fly |
+| Wishlist | One wishlist per user with the saved products |
+| Order | A purchase with a snapshot of the items, shipping address, payment details and status |
 
-## Available Scripts
+### API Groups
 
-- npm run dev
-- npm start
+| Group | Base path | What it covers |
+|---|---|---|
+| Authentication | `/auth` | Register with OTP, verify OTP, login, logout, forgot and reset password, current user |
+| Users | `/users` | Admin user management and profile updates |
+| Products | `/products` | List, search, create, update and delete products, plus reviews |
+| Cart | `/carts` | View cart, add, update and remove items, apply and remove coupons, clear cart |
+| Wishlist | `/wishlists` | View, add, remove and clear saved products |
+| Orders | `/orders` | Place, list, view and cancel orders |
+| Admin | `/admin` | Dashboard statistics, order management, carts and wishlist analytics |
 
--
- 
-## Environment Variables 
+## Project Phases
 
-The project uses the following environment variables:
+The project is split into four phases, one per week. Each phase builds on the previous one.
 
-- `PORT`: The port number on which the Express server runs.
-- `MONGO_URI`: The connection string for the MongoDB database.
-- `JWT_SECRET`: Secret key used to sign and verify JWT tokens.
-- `JWT_EXPIRES_IN`: Expiration timeframe for JWT tokens.
+| Phase | Focus | What it delivers |
+|---|---|---|
+| 1 | Foundation (Week 1) | Project setup, MongoDB connection, error handling, validation, the six models, a README and a Postman collection |
+| 2 | Authentication (Week 2) | Register with OTP email, verify OTP, login with JWT, protect and admin middleware, forgot and reset password, profile endpoints |
+| 3 | Products, Cart and Wishlist (Week 3) | Product CRUD with Cloudinary uploads, search and filters, cart with stock management and coupons, wishlist endpoints |
+| 4 | Orders, Payments and Admin (Week 4) | Order creation with transactions, Stripe payments and webhook, automated emails, admin order management and dashboard |
 
--
 
-## postman connection
+## Team
 
-* The Postman collection file is located at `docs/postman_collection.json`.
-* **How to import:**
-  1. Open Postman.
-  2. Click on **Import** in the top left corner.
-  3. Choose the file located at `docs/postman_collection.json`.
-  4. Ensure the `baseUrl` collection variable is set to match your local server running address.
+| Member | GitHub |
+|---|---|
+| Tasneem Mohamed Eid Hassan (تسنيم محمد عيد حسن) | [@tasneem-muhammad](https://github.com/tasneem-muhammad) |
+| Manal Fathy Mongod Mahgoub (منال فتحي منجود محجوب) | [@manalfathy620](https://github.com/manalfathy620) |
+| Fatma Heshmat Shtewy Mohamed (فاطمة حشمت شتيوي محمد) | [@fatma-heshmat](https://github.com/fatma-heshmat) |
+| Adel Mohamed Adel Ahmed (عادل محمد عادل احمد) | [@adelmhmd77](https://github.com/adelmhmd77) |
+| Osama Ahmed El-Saeed El-Nady (اسامه احمد السعيد النادي) | [@OsamaAhmed444](https://github.com/OsamaAhmed444) |
+| Kerolos Adel Aziz (كيرلس عادل عزيز) | [@keroadel14](https://github.com/keroadel14) |
+| Ahmed Nagah El-Sayed Sharaf (احمد نجاح السيد شرف) | [@ahmednagahms-dot](https://github.com/ahmednagahms-dot) |
+| Donia Mohamed Abu El-Saud (دنيا محمد ابو السعود) | [@mohammed-donia](https://github.com/mohammed-donia) |
+| Jomana Hesham Abu Zarifa (جومانا هشام ابوظريفة) | [@hzjumana27-star](https://github.com/hzjumana27-star) |
+| Shahd El-Hussein Mohamed Mostafa (شهد الحسين محمد مصطفى) | [@shahd-alhoussen](https://github.com/shahd-alhoussen) |
+| Safaa Ahmed Fahmy Abdallah (صفاء احمد فهمي عبدللا) | [@safaaa2024](https://github.com/safaaa2024) |
 
--
+---
 
-## Project Phases Overvie
-**Week 1**
- 1. Initialize the project (npm init, .env setup, folder structure)
- 2. Connect to MongoDB Atlas and handle connection errors 
- 3. Build the User Schema with the pre-save password hashing hook
- 4. Build the Product Schema with the pre-save slug hook and calcAverageRating method
- 5. Build the Cart, Order, Wishlist, and OTP schemas 
+Training program by **SEF Academy**.
 
-**Week 2**
- 6. Implement Register with OTP generation and email sending
- 7. Implement Verify OTP to activate the user account  
- 8. Implement Login with JWT generation
- 9. Write the protect middleware (verify JWT) and adminOnly middleware 
-10. Implement the full Forgot Password and Reset Password flow 
-11. Build the Profile GET, UPDATE, and change-password endpoints
- 
-**Week 3**
- 12. Implement all Product endpoints with Cloudinary upload via Multer 
- 13. Implement the Search endpoint with all filter and sort options
- 14. Build the complete Cart system with real-time stock management
- 15. Add the coupon system with apply and remove endpoints 
- 16. Build all Wishlist endpoints
- 
- **Week 4**
-  17. Implement createOrder using a Mongoose Transaction
-  18. Add Stripe PaymentIntent creation for online payments
-  19. Integrate Nodemailer for all transactional emails
-  20. Build the Admin Dashboard with Aggregation Pipeline queries 
-  21. Build Admin CRUD for Users and Admin Order management endpoints 
+## Team Workflow
 
-  -
-
-  # Team Workflow
-   
-   **Branch Naming:** `feature/phase1-Foundation: Setup, Database & Models`
-                      `feature/phase2-Authentication: Register, OTP, Login & Roles`
-                      `feature/phase3-Products, Cart & Wishliss`
-                      `feature/phase4-Orders, Payment & Admin Dashboard`
-
- **Commit Style:** Clear and descriptive commit messages explaining the exact changes.
- **Pull Requests (PR):** Submit one PR per task targeting the `dev` branch.
- **Code Review:** Every PR requires at least 1 team member review and approval before merging into `dev`.                    
+- Submit one pull request per task targeting the `dev` branch.
+- Use descriptive branch names and commit messages.
+- Each pull request should receive at least one team member review and approval before merging.
