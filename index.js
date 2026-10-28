@@ -18,6 +18,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(require("./middleware/blockOwnerRole")); 
+// app.use("/api/users", require("./routes/user.routes"));
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
