@@ -1,0 +1,1271 @@
+{
+  "info": {
+    "_postman_id": "801b16cd-9b8a-4883-a05d-c9dc6cf1ca08",
+    "name": "New Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "59184809",
+    "_collection_link": "https://go.postman.co/collection/59184809-801b16cd-9b8a-4883-a05d-c9dc6cf1ca08?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "postman-collection.json",
+      "item": [
+        {
+          "name": "Auth",
+          "item": [
+            {
+              "name": "send-otp",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"username\": \"john_doe\",\r\n  \"email\": \"john@example.com\",\r\n  \"password\": \"mypassword123\",\r\n  \"phone\": \"+201234567890\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/register/send-otp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "register",
+                    "send-otp"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "verify-otp",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"email\": \"john@example.com\",\r\n  \"otp\": \"123456\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/register/verify-otp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "register",
+                    "verify-otp"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "login",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"email\": \"john@example.com\",\r\n  \"password\": \"mypassword123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "logout",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"message\": \"string\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/logout",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "logout"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "forgot-password-send-otp",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"email\": \"john@example.com\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/forgot-password/send-otp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "forgot-password",
+                    "send-otp"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "forgot-password-verify-otp",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"email\": \"john@example.com\",\r\n  \"otp\": \"654321\",\r\n  \"newPassword\": \"newsecurepassword\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/forgot-password/verify-otp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "forgot-password",
+                    "verify-otp"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "me",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"user\": {\r\n    \"_id\": \"665f1a2b3c4d5e6f7a8b9c0d\",\r\n    \"username\": \"john_doe\",\r\n    \"email\": \"john@example.com\",\r\n    \"phone\": \"+201234567890\",\r\n    \"avatar\": \"string\",\r\n    \"role\": \"customer\",\r\n    \"addresses\": [\r\n      {\r\n        \"country\": \"Egypt\",\r\n        \"city\": \"Cairo\",\r\n        \"street\": \"123 Main St\",\r\n        \"building\": \"B5\",\r\n        \"postalCode\": \"11511\",\r\n        \"defaultAddress\": false\r\n      }\r\n    ],\r\n    \"isVerified\": true,\r\n    \"createdAt\": \"2026-10-26T20:35:39.279Z\",\r\n    \"updatedAt\": \"2026-10-26T20:35:39.279Z\"\r\n  }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "me"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "admin-test",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": false,\r\n  \"message\": \"Error message\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin-test",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "admin-test"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "change-role",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"message\": \"string\",\r\n  \"user\": {\r\n    \"_id\": \"665f1a2b3c4d5e6f7a8b9c0d\",\r\n    \"username\": \"john_doe\",\r\n    \"email\": \"john@example.com\",\r\n    \"phone\": \"+201234567890\",\r\n    \"avatar\": \"string\",\r\n    \"role\": \"customer\",\r\n    \"addresses\": [\r\n      {\r\n        \"country\": \"Egypt\",\r\n        \"city\": \"Cairo\",\r\n        \"street\": \"123 Main St\",\r\n        \"building\": \"B5\",\r\n        \"postalCode\": \"11511\",\r\n        \"defaultAddress\": false\r\n      }\r\n    ],\r\n    \"isVerified\": true,\r\n    \"createdAt\": \"2026-10-26T20:34:46.768Z\",\r\n    \"updatedAt\": \"2026-10-26T20:34:46.768Z\"\r\n  }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/change-role",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "change-role"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Users",
+          "item": [
+            {
+              "name": "all-users",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"count\": 0,\r\n  \"users\": [\r\n    {\r\n      \"_id\": \"665f1a2b3c4d5e6f7a8b9c0d\",\r\n      \"username\": \"john_doe\",\r\n      \"email\": \"john@example.com\",\r\n      \"phone\": \"+201234567890\",\r\n      \"avatar\": \"string\",\r\n      \"role\": \"customer\",\r\n      \"addresses\": [\r\n        {\r\n          \"country\": \"Egypt\",\r\n          \"city\": \"Cairo\",\r\n          \"street\": \"123 Main St\",\r\n          \"building\": \"B5\",\r\n          \"postalCode\": \"11511\",\r\n          \"defaultAddress\": false\r\n        }\r\n      ],\r\n      \"isVerified\": true,\r\n      \"createdAt\": \"2026-10-26T20:22:10.935Z\",\r\n      \"updatedAt\": \"2026-10-26T20:22:10.935Z\"\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/all",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "add-user",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"message\": \"string\",\r\n  \"user\": {\r\n    \"_id\": \"665f1a2b3c4d5e6f7a8b9c0d\",\r\n    \"username\": \"john_doe\",\r\n    \"email\": \"john@example.com\",\r\n    \"phone\": \"+201234567890\",\r\n    \"avatar\": \"string\",\r\n    \"role\": \"customer\",\r\n    \"addresses\": [\r\n      {\r\n        \"country\": \"Egypt\",\r\n        \"city\": \"Cairo\",\r\n        \"street\": \"123 Main St\",\r\n        \"building\": \"B5\",\r\n        \"postalCode\": \"11511\",\r\n        \"defaultAddress\": false\r\n      }\r\n    ],\r\n    \"isVerified\": true,\r\n    \"createdAt\": \"2026-10-26T20:22:10.943Z\",\r\n    \"updatedAt\": \"2026-10-26T20:22:10.943Z\"\r\n  }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/add",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "add"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "single-user",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"user\": {\r\n    \"_id\": \"665f1a2b3c4d5e6f7a8b9c0d\",\r\n    \"username\": \"john_doe\",\r\n    \"email\": \"john@example.com\",\r\n    \"phone\": \"+201234567890\",\r\n    \"avatar\": \"string\",\r\n    \"role\": \"customer\",\r\n    \"addresses\": [\r\n      {\r\n        \"country\": \"Egypt\",\r\n        \"city\": \"Cairo\",\r\n        \"street\": \"123 Main St\",\r\n        \"building\": \"B5\",\r\n        \"postalCode\": \"11511\",\r\n        \"defaultAddress\": false\r\n      }\r\n    ],\r\n    \"isVerified\": true,\r\n    \"createdAt\": \"2026-10-26T20:22:10.949Z\",\r\n    \"updatedAt\": \"2026-10-26T20:22:10.949Z\"\r\n  }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/{id}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "{id}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update-user",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"message\": \"string\",\r\n  \"user\": {\r\n    \"_id\": \"665f1a2b3c4d5e6f7a8b9c0d\",\r\n    \"username\": \"john_doe\",\r\n    \"email\": \"john@example.com\",\r\n    \"phone\": \"+201234567890\",\r\n    \"avatar\": \"string\",\r\n    \"role\": \"customer\",\r\n    \"addresses\": [\r\n      {\r\n        \"country\": \"Egypt\",\r\n        \"city\": \"Cairo\",\r\n        \"street\": \"123 Main St\",\r\n        \"building\": \"B5\",\r\n        \"postalCode\": \"11511\",\r\n        \"defaultAddress\": false\r\n      }\r\n    ],\r\n    \"isVerified\": true,\r\n    \"createdAt\": \"2026-10-26T20:22:10.959Z\",\r\n    \"updatedAt\": \"2026-10-26T20:22:10.959Z\"\r\n  }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/{id}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "{id}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "remove-user",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"message\": \"string\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/{id}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "{id}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Products",
+          "item": [
+            {
+              "name": "all-products",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"totalProducts\": 0,\r\n  \"currentPage\": 0,\r\n  \"totalPages\": 0,\r\n  \"products\": [\r\n    {\r\n      \"_id\": \"string\",\r\n      \"name\": \"Wireless Headphones\",\r\n      \"slug\": \"wireless-headphones\",\r\n      \"shortDescription\": \"High quality wireless headphones\",\r\n      \"description\": \"Full product description...\",\r\n      \"price\": 299.99,\r\n      \"discountPrice\": 249.99,\r\n      \"stock\": 50,\r\n      \"sku\": \"WH-001\",\r\n      \"images\": [\r\n        {\r\n          \"public_id\": \"ecommerce-products/abc123\",\r\n          \"url\": \"https://res.cloudinary.com/...\"\r\n        }\r\n      ],\r\n      \"category\": \"electronics\",\r\n      \"subcategory\": \"audio\",\r\n      \"brand\": \"Sony\",\r\n      \"tags\": [\r\n        \"wireless\",\r\n        \"audio\"\r\n      ],\r\n      \"reviews\": [\r\n        {\r\n          \"_id\": \"string\",\r\n          \"user\": \"string\",\r\n          \"username\": \"string\",\r\n          \"rating\": 4,\r\n          \"comment\": \"Great product!\",\r\n          \"createdAt\": \"2026-10-26T20:16:30.013Z\",\r\n          \"updatedAt\": \"2026-10-26T20:16:30.013Z\"\r\n        }\r\n      ],\r\n      \"averageRating\": 4.5,\r\n      \"numReviews\": 12,\r\n      \"featured\": false,\r\n      \"isActive\": true,\r\n      \"createdBy\": \"string\",\r\n      \"createdAt\": \"2026-10-26T20:16:30.013Z\",\r\n      \"updatedAt\": \"2026-10-26T20:16:30.013Z\"\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "creat-products",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"message\": \"string\",\r\n  \"product\": {\r\n    \"_id\": \"string\",\r\n    \"name\": \"Wireless Headphones\",\r\n    \"slug\": \"wireless-headphones\",\r\n    \"shortDescription\": \"High quality wireless headphones\",\r\n    \"description\": \"Full product description...\",\r\n    \"price\": 299.99,\r\n    \"discountPrice\": 249.99,\r\n    \"stock\": 50,\r\n    \"sku\": \"WH-001\",\r\n    \"images\": [\r\n      {\r\n        \"public_id\": \"ecommerce-products/abc123\",\r\n        \"url\": \"https://res.cloudinary.com/...\"\r\n      }\r\n    ],\r\n    \"category\": \"electronics\",\r\n    \"subcategory\": \"audio\",\r\n    \"brand\": \"Sony\",\r\n    \"tags\": [\r\n      \"wireless\",\r\n      \"audio\"\r\n    ],\r\n    \"reviews\": [\r\n      {\r\n        \"_id\": \"string\",\r\n        \"user\": \"string\",\r\n        \"username\": \"string\",\r\n        \"rating\": 4,\r\n        \"comment\": \"Great product!\",\r\n        \"createdAt\": \"2026-10-26T20:17:24.150Z\",\r\n        \"updatedAt\": \"2026-10-26T20:17:24.150Z\"\r\n      }\r\n    ],\r\n    \"averageRating\": 4.5,\r\n    \"numReviews\": 12,\r\n    \"featured\": false,\r\n    \"isActive\": true,\r\n    \"createdBy\": \"string\",\r\n    \"createdAt\": \"2026-10-26T20:17:24.150Z\",\r\n    \"updatedAt\": \"2026-10-26T20:17:24.150Z\"\r\n  }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "search",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\t\r\nSearch results\r\n\r\nMedia type\r\n\r\napplication/json\r\nControls Accept header.\r\nExample Value\r\nSchema\r\n{\r\n  \"success\": true,\r\n  \"totalProducts\": 0,\r\n  \"currentPage\": 0,\r\n  \"totalPages\": 0,\r\n  \"products\": [\r\n    {\r\n      \"_id\": \"string\",\r\n      \"name\": \"Wireless Headphones\",\r\n      \"slug\": \"wireless-headphones\",\r\n      \"shortDescription\": \"High quality wireless headphones\",\r\n      \"description\": \"Full product description...\",\r\n      \"price\": 299.99,\r\n      \"discountPrice\": 249.99,\r\n      \"stock\": 50,\r\n      \"sku\": \"WH-001\",\r\n      \"images\": [\r\n        {\r\n          \"public_id\": \"ecommerce-products/abc123\",\r\n          \"url\": \"https://res.cloudinary.com/...\"\r\n        }\r\n      ],\r\n      \"category\": \"electronics\",\r\n      \"subcategory\": \"audio\",\r\n      \"brand\": \"Sony\",\r\n      \"tags\": [\r\n        \"wireless\",\r\n        \"audio\"\r\n      ],\r\n      \"reviews\": [\r\n        {\r\n          \"_id\": \"string\",\r\n          \"user\": \"string\",\r\n          \"username\": \"string\",\r\n          \"rating\": 4,\r\n          \"comment\": \"Great product!\",\r\n          \"createdAt\": \"2026-10-26T20:18:28.406Z\",\r\n          \"updatedAt\": \"2026-10-26T20:18:28.406Z\"\r\n        }\r\n      ],\r\n      \"averageRating\": 4.5,\r\n      \"numReviews\": 12,\r\n      \"featured\": false,\r\n      \"isActive\": true,\r\n      \"createdBy\": \"string\",\r\n      \"createdAt\": \"2026-10-26T20:18:28.406Z\",\r\n      \"updatedAt\": \"2026-10-26T20:18:28.406Z\"\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/products/search",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "search"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "single-product",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"product\": {\r\n    \"_id\": \"string\",\r\n    \"name\": \"Wireless Headphones\",\r\n    \"slug\": \"wireless-headphones\",\r\n    \"shortDescription\": \"High quality wireless headphones\",\r\n    \"description\": \"Full product description...\",\r\n    \"price\": 299.99,\r\n    \"discountPrice\": 249.99,\r\n    \"stock\": 50,\r\n    \"sku\": \"WH-001\",\r\n    \"images\": [\r\n      {\r\n        \"public_id\": \"ecommerce-products/abc123\",\r\n        \"url\": \"https://res.cloudinary.com/...\"\r\n      }\r\n    ],\r\n    \"category\": \"electronics\",\r\n    \"subcategory\": \"audio\",\r\n    \"brand\": \"Sony\",\r\n    \"tags\": [\r\n      \"wireless\",\r\n      \"audio\"\r\n    ],\r\n    \"reviews\": [\r\n      {\r\n        \"_id\": \"string\",\r\n        \"user\": \"string\",\r\n        \"username\": \"string\",\r\n        \"rating\": 4,\r\n        \"comment\": \"Great product!\",\r\n        \"createdAt\": \"2026-10-26T20:19:34.319Z\",\r\n        \"updatedAt\": \"2026-10-26T20:19:34.319Z\"\r\n      }\r\n    ],\r\n    \"averageRating\": 4.5,\r\n    \"numReviews\": 12,\r\n    \"featured\": false,\r\n    \"isActive\": true,\r\n    \"createdBy\": \"string\",\r\n    \"createdAt\": \"2026-10-26T20:19:34.319Z\",\r\n    \"updatedAt\": \"2026-10-26T20:19:34.319Z\"\r\n  }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/products/{id}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "{id}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "remove-product",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"message\": \"string\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/products/{id}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "{id}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\t\r\nProduct updated\r\n\r\nMedia type\r\n\r\napplication/json\r\nControls Accept header.\r\nExample Value\r\nSchema\r\n{\r\n  \"success\": true,\r\n  \"message\": \"string\",\r\n  \"product\": {\r\n    \"_id\": \"string\",\r\n    \"name\": \"Wireless Headphones\",\r\n    \"slug\": \"wireless-headphones\",\r\n    \"shortDescription\": \"High quality wireless headphones\",\r\n    \"description\": \"Full product description...\",\r\n    \"price\": 299.99,\r\n    \"discountPrice\": 249.99,\r\n    \"stock\": 50,\r\n    \"sku\": \"WH-001\",\r\n    \"images\": [\r\n      {\r\n        \"public_id\": \"ecommerce-products/abc123\",\r\n        \"url\": \"https://res.cloudinary.com/...\"\r\n      }\r\n    ],\r\n    \"category\": \"electronics\",\r\n    \"subcategory\": \"audio\",\r\n    \"brand\": \"Sony\",\r\n    \"tags\": [\r\n      \"wireless\",\r\n      \"audio\"\r\n    ],\r\n    \"reviews\": [\r\n      {\r\n        \"_id\": \"string\",\r\n        \"user\": \"string\",\r\n        \"username\": \"string\",\r\n        \"rating\": 4,\r\n        \"comment\": \"Great product!\",\r\n        \"createdAt\": \"2026-10-26T20:21:31.775Z\",\r\n        \"updatedAt\": \"2026-10-26T20:21:31.775Z\"\r\n      }\r\n    ],\r\n    \"averageRating\": 4.5,\r\n    \"numReviews\": 12,\r\n    \"featured\": false,\r\n    \"isActive\": true,\r\n    \"createdBy\": \"string\",\r\n    \"createdAt\": \"2026-10-26T20:21:31.775Z\",\r\n    \"updatedAt\": \"2026-10-26T20:21:31.775Z\"\r\n  }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/products/update/{id}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "update",
+                    "{id}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Reveiws",
+          "item": [
+            {
+              "name": "get-product-reveiw",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"averageRating\": 0,\r\n  \"numReviews\": 0,\r\n  \"reviews\": [\r\n    {\r\n      \"_id\": \"string\",\r\n      \"user\": \"string\",\r\n      \"username\": \"string\",\r\n      \"rating\": 4,\r\n      \"comment\": \"Great product!\",\r\n      \"createdAt\": \"2026-10-26T20:14:53.419Z\",\r\n      \"updatedAt\": \"2026-10-26T20:14:53.419Z\"\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/products/{id}/reveiws",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "{id}",
+                    "reveiws"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "add",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"rating\": 5,\r\n  \"comment\": \"Excellent quality!\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/products/{id}/reveiws",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "{id}",
+                    "reveiws"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "remove",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"message\": \"string\",\r\n  \"averageRating\": 0,\r\n  \"numReviews\": 0\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/products/{id}/reveiws/{reveiwid}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "{id}",
+                    "reveiws",
+                    "{reveiwid}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Cart",
+          "item": [
+            {
+              "name": "carts",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": ""
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "add-items",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"productId\": \"665f1a2b3c4d5e6f7a8b9c0d\",\r\n  \"quantity\": 2\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/carts/items",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "carts",
+                    "items"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update-quantity",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"productId\": \"665f1a2b3c4d5e6f7a8b9c0d\",\r\n  \"quantity\": 3\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/carts/items",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "carts",
+                    "items"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "remove-item",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"itemCount\": 3,\r\n  \"subtotal\": 749.97,\r\n  \"discountAmount\": 74.99,\r\n  \"total\": 674.98,\r\n  \"coupon\": \"SAVE10\",\r\n  \"items\": [\r\n    {\r\n      \"_id\": \"string\",\r\n      \"product\": \"string\",\r\n      \"name\": \"Wireless Headphones\",\r\n      \"image\": \"string\",\r\n      \"price\": 249.99,\r\n      \"quantity\": 2\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/carts/items/{productid}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "carts",
+                    "items",
+                    "{productid}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "coupon",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"code\": \"SAVE10\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/carts/coupon",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "carts",
+                    "coupon"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "remove-coupon",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"message\": \"string\",\r\n  \"subtotal\": 0,\r\n  \"total\": 0\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/carts/coupon",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "carts",
+                    "coupon"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "clear-cart",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"message\": \"string\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/carts/clear",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "carts",
+                    "clear"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Orders",
+          "item": [
+            {
+              "name": "orders",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"shippingAddress\": {\r\n    \"fullName\": \"John Doe\",\r\n    \"phone\": \"+201234567890\",\r\n    \"country\": \"Egypt\",\r\n    \"city\": \"Cairo\",\r\n    \"address\": \"123 Main Street, Apt 4\",\r\n    \"postalCode\": \"11511\"\r\n  },\r\n  \"paymentMethod\": \"cash\",\r\n  \"customerNote\": \"Please call before delivery\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "order-my",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"total\": 0,\r\n  \"currentPage\": 0,\r\n  \"totalPages\": 0,\r\n  \"orders\": [\r\n    {\r\n      \"_id\": \"string\",\r\n      \"user\": \"string\",\r\n      \"items\": [\r\n        {\r\n          \"product\": \"string\",\r\n          \"name\": \"string\",\r\n          \"image\": \"string\",\r\n          \"price\": 0,\r\n          \"quantity\": 0\r\n        }\r\n      ],\r\n      \"shippingAddress\": {\r\n        \"fullName\": \"John Doe\",\r\n        \"phone\": \"+201234567890\",\r\n        \"country\": \"Egypt\",\r\n        \"city\": \"Cairo\",\r\n        \"address\": \"123 Main Street, Apt 4\",\r\n        \"postalCode\": \"11511\"\r\n      },\r\n      \"paymentMethod\": \"cash\",\r\n      \"paymentStatus\": \"pending\",\r\n      \"transactionId\": \"string\",\r\n      \"subtotal\": 500,\r\n      \"shippingFee\": 50,\r\n      \"tax\": 70,\r\n      \"discount\": 0,\r\n      \"totalPrice\": 620,\r\n      \"status\": \"confirmed\",\r\n      \"paidAt\": \"2026-10-26T20:02:08.500Z\",\r\n      \"deliveredAt\": \"2026-10-26T20:02:08.500Z\",\r\n      \"cancelledAt\": \"2026-10-26T20:02:08.500Z\",\r\n      \"customerNote\": \"Please deliver before 5 PM\",\r\n      \"adminNote\": \"string\",\r\n      \"createdAt\": \"2026-10-26T20:02:08.500Z\",\r\n      \"updatedAt\": \"2026-10-26T20:02:08.500Z\"\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders/my",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "my"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "single-order",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"order\": {\r\n    \"_id\": \"string\",\r\n    \"user\": \"string\",\r\n    \"items\": [\r\n      {\r\n        \"product\": \"string\",\r\n        \"name\": \"string\",\r\n        \"image\": \"string\",\r\n        \"price\": 0,\r\n        \"quantity\": 0\r\n      }\r\n    ],\r\n    \"shippingAddress\": {\r\n      \"fullName\": \"John Doe\",\r\n      \"phone\": \"+201234567890\",\r\n      \"country\": \"Egypt\",\r\n      \"city\": \"Cairo\",\r\n      \"address\": \"123 Main Street, Apt 4\",\r\n      \"postalCode\": \"11511\"\r\n    },\r\n    \"paymentMethod\": \"cash\",\r\n    \"paymentStatus\": \"pending\",\r\n    \"transactionId\": \"string\",\r\n    \"subtotal\": 500,\r\n    \"shippingFee\": 50,\r\n    \"tax\": 70,\r\n    \"discount\": 0,\r\n    \"totalPrice\": 620,\r\n    \"status\": \"confirmed\",\r\n    \"paidAt\": \"2026-10-26T20:01:48.803Z\",\r\n    \"deliveredAt\": \"2026-10-26T20:01:48.803Z\",\r\n    \"cancelledAt\": \"2026-10-26T20:01:48.803Z\",\r\n    \"customerNote\": \"Please deliver before 5 PM\",\r\n    \"adminNote\": \"string\",\r\n    \"createdAt\": \"2026-10-26T20:01:48.803Z\",\r\n    \"updatedAt\": \"2026-10-26T20:01:48.803Z\"\r\n  }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders/my/{id}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "my",
+                    "{id}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "cancel-order",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": ""
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Order-Admin",
+          "item": [
+            {
+              "name": "dashboard",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"dashboard\": {\r\n    \"orders\": {\r\n      \"total\": 0,\r\n      \"pending\": 0,\r\n      \"processing\": 0,\r\n      \"confirmed\": 0,\r\n      \"shipped\": 0,\r\n      \"delivered\": 0,\r\n      \"cancelled\": 0\r\n    },\r\n    \"revenue\": {\r\n      \"total\": 0,\r\n      \"thisMonth\": 0,\r\n      \"lastMonth\": 0,\r\n      \"growthPercent\": 0\r\n    },\r\n    \"recentOrders\": [\r\n      {\r\n        \"_id\": \"string\",\r\n        \"user\": \"string\",\r\n        \"items\": [\r\n          {\r\n            \"product\": \"string\",\r\n            \"name\": \"string\",\r\n            \"image\": \"string\",\r\n            \"price\": 0,\r\n            \"quantity\": 0\r\n          }\r\n        ],\r\n        \"shippingAddress\": {\r\n          \"fullName\": \"John Doe\",\r\n          \"phone\": \"+201234567890\",\r\n          \"country\": \"Egypt\",\r\n          \"city\": \"Cairo\",\r\n          \"address\": \"123 Main Street, Apt 4\",\r\n          \"postalCode\": \"11511\"\r\n        },\r\n        \"paymentMethod\": \"cash\",\r\n        \"paymentStatus\": \"pending\",\r\n        \"transactionId\": \"string\",\r\n        \"subtotal\": 500,\r\n        \"shippingFee\": 50,\r\n        \"tax\": 70,\r\n        \"discount\": 0,\r\n        \"totalPrice\": 620,\r\n        \"status\": \"confirmed\",\r\n        \"paidAt\": \"2026-10-26T19:57:51.753Z\",\r\n        \"deliveredAt\": \"2026-10-26T19:57:51.753Z\",\r\n        \"cancelledAt\": \"2026-10-26T19:57:51.753Z\",\r\n        \"customerNote\": \"Please deliver before 5 PM\",\r\n        \"adminNote\": \"string\",\r\n        \"createdAt\": \"2026-10-26T19:57:51.753Z\",\r\n        \"updatedAt\": \"2026-10-26T19:57:51.753Z\"\r\n      }\r\n    ],\r\n    \"topProducts\": [\r\n      {\r\n        \"_id\": \"string\",\r\n        \"name\": \"string\",\r\n        \"image\": \"string\",\r\n        \"totalSold\": 0,\r\n        \"revenue\": 0\r\n      }\r\n    ],\r\n    \"ordersByStatus\": [\r\n      {\r\n        \"_id\": \"string\",\r\n        \"count\": 0\r\n      }\r\n    ],\r\n    \"dailyRevenue\": [\r\n      {\r\n        \"_id\": \"string\",\r\n        \"revenue\": 0,\r\n        \"orders\": 0\r\n      }\r\n    ],\r\n    \"totalCustomers\": 0\r\n  }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders/admin/dashboard",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "admin",
+                    "dashboard"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "carts",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"total\": 0,\r\n  \"currentPage\": 0,\r\n  \"totalPages\": 0,\r\n  \"carts\": [\r\n    {\r\n      \"_id\": \"string\",\r\n      \"user\": {\r\n        \"username\": \"string\",\r\n        \"email\": \"string\"\r\n      },\r\n      \"items\": [\r\n        {\r\n          \"_id\": \"string\",\r\n          \"product\": \"string\",\r\n          \"name\": \"Wireless Headphones\",\r\n          \"image\": \"string\",\r\n          \"price\": 249.99,\r\n          \"quantity\": 2\r\n        }\r\n      ],\r\n      \"subtotal\": 0,\r\n      \"itemCount\": 0\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders/admin/carts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "admin",
+                    "carts"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "orders-admin-all",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"total\": 0,\r\n  \"currentPage\": 0,\r\n  \"totalPages\": 0,\r\n  \"orders\": [\r\n    {\r\n      \"_id\": \"string\",\r\n      \"user\": \"string\",\r\n      \"items\": [\r\n        {\r\n          \"product\": \"string\",\r\n          \"name\": \"string\",\r\n          \"image\": \"string\",\r\n          \"price\": 0,\r\n          \"quantity\": 0\r\n        }\r\n      ],\r\n      \"shippingAddress\": {\r\n        \"fullName\": \"John Doe\",\r\n        \"phone\": \"+201234567890\",\r\n        \"country\": \"Egypt\",\r\n        \"city\": \"Cairo\",\r\n        \"address\": \"123 Main Street, Apt 4\",\r\n        \"postalCode\": \"11511\"\r\n      },\r\n      \"paymentMethod\": \"cash\",\r\n      \"paymentStatus\": \"pending\",\r\n      \"transactionId\": \"string\",\r\n      \"subtotal\": 500,\r\n      \"shippingFee\": 50,\r\n      \"tax\": 70,\r\n      \"discount\": 0,\r\n      \"totalPrice\": 620,\r\n      \"status\": \"confirmed\",\r\n      \"paidAt\": \"2026-10-26T19:56:42.505Z\",\r\n      \"deliveredAt\": \"2026-10-26T19:56:42.505Z\",\r\n      \"cancelledAt\": \"2026-10-26T19:56:42.505Z\",\r\n      \"customerNote\": \"Please deliver before 5 PM\",\r\n      \"adminNote\": \"string\",\r\n      \"createdAt\": \"2026-10-26T19:56:42.506Z\",\r\n      \"updatedAt\": \"2026-10-26T19:56:42.506Z\"\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders/admin",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "admin"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "order-admin-single",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"order\": {\r\n    \"_id\": \"string\",\r\n    \"user\": \"string\",\r\n    \"items\": [\r\n      {\r\n        \"product\": \"string\",\r\n        \"name\": \"string\",\r\n        \"image\": \"string\",\r\n        \"price\": 0,\r\n        \"quantity\": 0\r\n      }\r\n    ],\r\n    \"shippingAddress\": {\r\n      \"fullName\": \"John Doe\",\r\n      \"phone\": \"+201234567890\",\r\n      \"country\": \"Egypt\",\r\n      \"city\": \"Cairo\",\r\n      \"address\": \"123 Main Street, Apt 4\",\r\n      \"postalCode\": \"11511\"\r\n    },\r\n    \"paymentMethod\": \"cash\",\r\n    \"paymentStatus\": \"pending\",\r\n    \"transactionId\": \"string\",\r\n    \"subtotal\": 500,\r\n    \"shippingFee\": 50,\r\n    \"tax\": 70,\r\n    \"discount\": 0,\r\n    \"totalPrice\": 620,\r\n    \"status\": \"confirmed\",\r\n    \"paidAt\": \"2026-10-26T19:56:12.315Z\",\r\n    \"deliveredAt\": \"2026-10-26T19:56:12.315Z\",\r\n    \"cancelledAt\": \"2026-10-26T19:56:12.315Z\",\r\n    \"customerNote\": \"Please deliver before 5 PM\",\r\n    \"adminNote\": \"string\",\r\n    \"createdAt\": \"2026-10-26T19:56:12.315Z\",\r\n    \"updatedAt\": \"2026-10-26T19:56:12.315Z\"\r\n  }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders/admin/{id}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "admin",
+                    "{id}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "status",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"status\": \"shipped\",\r\n  \"adminNote\": \"Shipped via FedEx\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders/admin/{id}/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "admin",
+                    "{id}",
+                    "status"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Wishlist",
+          "item": [
+            {
+              "name": "whishlist-add",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"message\": \"string\",\r\n  \"wishlist\": {\r\n    \"_id\": \"string\",\r\n    \"user\": \"string\",\r\n    \"products\": [\r\n      {\r\n        \"_id\": \"string\",\r\n        \"name\": \"Wireless Headphones\",\r\n        \"slug\": \"wireless-headphones\",\r\n        \"shortDescription\": \"High quality wireless headphones\",\r\n        \"description\": \"Full product description...\",\r\n        \"price\": 299.99,\r\n        \"discountPrice\": 249.99,\r\n        \"stock\": 50,\r\n        \"sku\": \"WH-001\",\r\n        \"images\": [\r\n          {\r\n            \"public_id\": \"ecommerce-products/abc123\",\r\n            \"url\": \"https://res.cloudinary.com/...\"\r\n          }\r\n        ],\r\n        \"category\": \"electronics\",\r\n        \"subcategory\": \"audio\",\r\n        \"brand\": \"Sony\",\r\n        \"tags\": [\r\n          \"wireless\",\r\n          \"audio\"\r\n        ],\r\n        \"reviews\": [\r\n          {\r\n            \"_id\": \"string\",\r\n            \"user\": \"string\",\r\n            \"username\": \"string\",\r\n            \"rating\": 4,\r\n            \"comment\": \"Great product!\",\r\n            \"createdAt\": \"2026-10-26T19:39:25.289Z\",\r\n            \"updatedAt\": \"2026-10-26T19:39:25.289Z\"\r\n          }\r\n        ],\r\n        \"averageRating\": 4.5,\r\n        \"numReviews\": 12,\r\n        \"featured\": false,\r\n        \"isActive\": true,\r\n        \"createdBy\": \"string\",\r\n        \"createdAt\": \"2026-10-26T19:39:25.289Z\",\r\n        \"updatedAt\": \"2026-10-26T19:39:25.289Z\"\r\n      }\r\n    ],\r\n    \"createdAt\": \"2026-10-26T19:39:25.289Z\",\r\n    \"updatedAt\": \"2026-10-26T19:39:25.289Z\"\r\n  }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/whishlist/add/{productid}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "whishlist",
+                    "add",
+                    "{productid}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "whishlist-remove",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"message\": \"string\",\r\n  \"wishlist\": {\r\n    \"_id\": \"string\",\r\n    \"user\": \"string\",\r\n    \"products\": [\r\n      {\r\n        \"_id\": \"string\",\r\n        \"name\": \"Wireless Headphones\",\r\n        \"slug\": \"wireless-headphones\",\r\n        \"shortDescription\": \"High quality wireless headphones\",\r\n        \"description\": \"Full product description...\",\r\n        \"price\": 299.99,\r\n        \"discountPrice\": 249.99,\r\n        \"stock\": 50,\r\n        \"sku\": \"WH-001\",\r\n        \"images\": [\r\n          {\r\n            \"public_id\": \"ecommerce-products/abc123\",\r\n            \"url\": \"https://res.cloudinary.com/...\"\r\n          }\r\n        ],\r\n        \"category\": \"electronics\",\r\n        \"subcategory\": \"audio\",\r\n        \"brand\": \"Sony\",\r\n        \"tags\": [\r\n          \"wireless\",\r\n          \"audio\"\r\n        ],\r\n        \"reviews\": [\r\n          {\r\n            \"_id\": \"string\",\r\n            \"user\": \"string\",\r\n            \"username\": \"string\",\r\n            \"rating\": 4,\r\n            \"comment\": \"Great product!\",\r\n            \"createdAt\": \"2026-10-26T19:47:51.248Z\",\r\n            \"updatedAt\": \"2026-10-26T19:47:51.248Z\"\r\n          }\r\n        ],\r\n        \"averageRating\": 4.5,\r\n        \"numReviews\": 12,\r\n        \"featured\": false,\r\n        \"isActive\": true,\r\n        \"createdBy\": \"string\",\r\n        \"createdAt\": \"2026-10-26T19:47:51.248Z\",\r\n        \"updatedAt\": \"2026-10-26T19:47:51.248Z\"\r\n      }\r\n    ],\r\n    \"createdAt\": \"2026-10-26T19:47:51.248Z\",\r\n    \"updatedAt\": \"2026-10-26T19:47:51.248Z\"\r\n  }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/whishlist/remove/{productid}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "whishlist",
+                    "remove",
+                    "{productid}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "wishlist-my",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"totalProducts\": 0,\r\n  \"wishlist\": {\r\n    \"_id\": \"string\",\r\n    \"user\": \"string\",\r\n    \"products\": [\r\n      {\r\n        \"_id\": \"string\",\r\n        \"name\": \"Wireless Headphones\",\r\n        \"slug\": \"wireless-headphones\",\r\n        \"shortDescription\": \"High quality wireless headphones\",\r\n        \"description\": \"Full product description...\",\r\n        \"price\": 299.99,\r\n        \"discountPrice\": 249.99,\r\n        \"stock\": 50,\r\n        \"sku\": \"WH-001\",\r\n        \"images\": [\r\n          {\r\n            \"public_id\": \"ecommerce-products/abc123\",\r\n            \"url\": \"https://res.cloudinary.com/...\"\r\n          }\r\n        ],\r\n        \"category\": \"electronics\",\r\n        \"subcategory\": \"audio\",\r\n        \"brand\": \"Sony\",\r\n        \"tags\": [\r\n          \"wireless\",\r\n          \"audio\"\r\n        ],\r\n        \"reviews\": [\r\n          {\r\n            \"_id\": \"string\",\r\n            \"user\": \"string\",\r\n            \"username\": \"string\",\r\n            \"rating\": 4,\r\n            \"comment\": \"Great product!\",\r\n            \"createdAt\": \"2026-10-26T19:49:55.426Z\",\r\n            \"updatedAt\": \"2026-10-26T19:49:55.426Z\"\r\n          }\r\n        ],\r\n        \"averageRating\": 4.5,\r\n        \"numReviews\": 12,\r\n        \"featured\": false,\r\n        \"isActive\": true,\r\n        \"createdBy\": \"string\",\r\n        \"createdAt\": \"2026-10-26T19:49:55.426Z\",\r\n        \"updatedAt\": \"2026-10-26T19:49:55.426Z\"\r\n      }\r\n    ],\r\n    \"createdAt\": \"2026-10-26T19:49:55.426Z\",\r\n    \"updatedAt\": \"2026-10-26T19:49:55.426Z\"\r\n  }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/wishlist/my",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "wishlist",
+                    "my"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "wishlist-clear",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"message\": \"string\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/wishlist/clear",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "wishlist",
+                    "clear"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Wishlist-Admin",
+          "item": [
+            {
+              "name": "wishlist-admin-all",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"total\": 0,\r\n  \"currentPage\": 0,\r\n  \"totalPages\": 0,\r\n  \"wishlists\": [\r\n    {\r\n      \"_id\": \"string\",\r\n      \"user\": \"string\",\r\n      \"products\": [\r\n        {\r\n          \"_id\": \"string\",\r\n          \"name\": \"Wireless Headphones\",\r\n          \"slug\": \"wireless-headphones\",\r\n          \"shortDescription\": \"High quality wireless headphones\",\r\n          \"description\": \"Full product description...\",\r\n          \"price\": 299.99,\r\n          \"discountPrice\": 249.99,\r\n          \"stock\": 50,\r\n          \"sku\": \"WH-001\",\r\n          \"images\": [\r\n            {\r\n              \"public_id\": \"ecommerce-products/abc123\",\r\n              \"url\": \"https://res.cloudinary.com/...\"\r\n            }\r\n          ],\r\n          \"category\": \"electronics\",\r\n          \"subcategory\": \"audio\",\r\n          \"brand\": \"Sony\",\r\n          \"tags\": [\r\n            \"wireless\",\r\n            \"audio\"\r\n          ],\r\n          \"reviews\": [\r\n            {\r\n              \"_id\": \"string\",\r\n              \"user\": \"string\",\r\n              \"username\": \"string\",\r\n              \"rating\": 4,\r\n              \"comment\": \"Great product!\",\r\n              \"createdAt\": \"2026-10-26T19:36:07.475Z\",\r\n              \"updatedAt\": \"2026-10-26T19:36:07.475Z\"\r\n            }\r\n          ],\r\n          \"averageRating\": 4.5,\r\n          \"numReviews\": 12,\r\n          \"featured\": false,\r\n          \"isActive\": true,\r\n          \"createdBy\": \"string\",\r\n          \"createdAt\": \"2026-10-26T19:36:07.475Z\",\r\n          \"updatedAt\": \"2026-10-26T19:36:07.475Z\"\r\n        }\r\n      ],\r\n      \"createdAt\": \"2026-10-26T19:36:07.475Z\",\r\n      \"updatedAt\": \"2026-10-26T19:36:07.475Z\"\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/Wishlists/admin/all",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Wishlists",
+                    "admin",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "wishlist-admin-state",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"success\": true,\r\n  \"statistics\": {\r\n    \"totalWishlists\": 0,\r\n    \"totalWishlistProducts\": 0,\r\n    \"topProducts\": [\r\n      {\r\n        \"_id\": \"string\",\r\n        \"count\": 0,\r\n        \"productId\": \"string\",\r\n        \"name\": \"string\",\r\n        \"image\": \"string\"\r\n      }\r\n    ]\r\n  }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/whishlist/admin/state",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "whishlist",
+                    "admin",
+                    "state"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": ""
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}
