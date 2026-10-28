@@ -1,4 +1,8 @@
+
 require('dotenv').config(); // must be first
+
+const dns = require("node:dns");
+dns.setServers(["1.1.1.1", "8.8.8.8", "8.8.4.4"]);
 
 const express = require('express');
 const cors = require('cors');
@@ -7,13 +11,7 @@ const morgan = require('morgan');
 
 const connectDB = require('./DB/connection');
 
-const dns = require("node:dns")
 const { errorHandler, notFound } = require('./middleware/errorHandler');
-
-dns.setServers([
-  "8.8.8.8",
-  "8.8.4.4"
-]);
 
 const app = express();
 
