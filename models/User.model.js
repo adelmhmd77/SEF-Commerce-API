@@ -1,5 +1,5 @@
-const mongoose = require("mongoose")
-const bcrypt = require("bcryptjs")
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 const addressSchema = new mongoose.Schema(
   {
@@ -16,7 +16,7 @@ const addressSchema = new mongoose.Schema(
       type: String,
     },
   },
-  { _id: false },
+  { _id: false }
 );
 
 const userSchema = new mongoose.Schema(
@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      minlength: 2
+      minlength: 2,
     },
     email: {
       type: String,
@@ -69,14 +69,14 @@ const userSchema = new mongoose.Schema(
       type: Date,
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 //==============
 //Hash -->register/update(findById,save())
 //==============
 userSchema.pre("save", async function () {
-  if (!this.isModified("password")) { //field name
+  if (!this.isModified("password")) {
     return;
   }
   this.password = await bcrypt.hash(this.password, 10);
@@ -91,5 +91,4 @@ userSchema.methods.comparePassword = async function (loginpassword) {
 
 const User = mongoose.model("User", userSchema);
 
-
-module.exports = User
+module.exports = User;
