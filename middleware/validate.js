@@ -1,6 +1,25 @@
 const Joi = require('joi');
 
 const validate = (schema) => (req, res, next) => {
+  if (typeof schema?.validate === 'function') {
+    const { error, value } = schema.validate(req.body, {
+      abortEarly: false,
+      stripUnknown: true,
+    });
+
+    if (error) {
+      const errors = error.details.map((d) => d.message);
+      return res.status(400).json({
+        success: false,
+        message: errors.join(', '),
+        errors,
+      });
+    }
+
+    req.body = value;
+    return next();
+  }
+
   const toValidate = {};
   const sections = ['body', 'params', 'query'];
 

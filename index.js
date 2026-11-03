@@ -40,7 +40,6 @@ app.get('/', (req, res) => {
 // Example: app.use('/api/auth', require('./routes/auth.routes'));
 // ===========================================================
 app.use('/api/v1/auth', require('./routes/auth.routes'));
-app.use('/auth', require('./routes/auth.routes'));
 
 app.use(notFound);      // 404 handler
 app.use(errorHandler);  // must be last
