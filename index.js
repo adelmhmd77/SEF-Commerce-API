@@ -25,6 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(require("./middleware/blockOwnerRole"));
 // app.use("/api/users", require("./routes/user.routes"));
+app.use("/auth",require("./routes/auth.routes.js"))
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
