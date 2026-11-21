@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 const User = require('../models/User.model');
 
 exports.protect = async (req, res, next) => {
@@ -20,6 +21,13 @@ exports.protect = async (req, res, next) => {
 
     // Verify the token and decode its payload.
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    if (typeof decoded.id !== 'string' || !mongoose.isValidObjectId(decoded.id)) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid token',
+      });
+    }
 
     // Load the user without returning the password.
     const currentUser = await User.findById(decoded.id).select('-password');

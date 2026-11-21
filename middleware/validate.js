@@ -1,33 +1,16 @@
 const Joi = require('joi');
 
 const validate = (schema) => (req, res, next) => {
-  if (typeof schema?.validate === 'function') {
-    const { error, value } = schema.validate(req.body, {
-      abortEarly: false,
-      stripUnknown: true,
-    });
-
-    if (error) {
-      const errors = error.details.map((d) => d.message);
-      return res.status(400).json({
-        success: false,
-        message: errors.join(', '),
-        errors,
-      });
-    }
-
-    req.body = value;
-    return next();
-  }
-
+  const schemaBySection =
+    typeof schema?.validate === 'function' ? { body: schema } : schema;
   const toValidate = {};
   const sections = ['body', 'params', 'query'];
 
   sections.forEach((section) => {
-    if (schema[section]) toValidate[section] = req[section];
+    if (schemaBySection[section]) toValidate[section] = req[section];
   });
 
-  const validationSchema = Joi.object(schema);
+  const validationSchema = Joi.object(schemaBySection);
 
   const { error, value } = validationSchema.validate(toValidate, {
     abortEarly: false,
@@ -44,7 +27,7 @@ const validate = (schema) => (req, res, next) => {
   }
 
   sections.forEach((section) => {
-    if (!schema[section]) return;
+    if (!schemaBySection[section]) return;
 
     if (section === 'query') {
       Object.defineProperty(req, section, {

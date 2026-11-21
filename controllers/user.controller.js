@@ -51,7 +51,7 @@ exports.updateUserRole = async (req, res, next) => {
 exports.updateProfile = async (req, res, next) =>{
   try{
 
-    const allowedUpdates = ['username', 'phone', 'avatar', 'addresses']
+    const allowedUpdates = ['username', 'phone', 'avatar']
     const updates = {}
 
     allowedUpdates.forEach((field) => {

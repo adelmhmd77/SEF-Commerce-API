@@ -163,9 +163,41 @@ const forgotPasswordSendOtp = async (req, res, next) => {
   }
 };
 
+
+const logout = async (req, res, next) => {
+  try {
+    return res.status(200).json({
+      success: true,
+      message: 'Logged out successfully',
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+const getMe = async (req, res, next) => {
+  try {
+    const userData = req.user.toObject();
+    delete userData.password;
+    delete userData.resetPasswordToken;
+    delete userData.resetPasswordExpire;
+
+    return res.status(200).json({
+      success: true,
+      user: userData,
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+
+
 module.exports = {
   login,
   sendRegisterOTP,
   verifyRegisterOTP,
   forgotPasswordSendOtp,
+  getMe,
+  logout
 };
