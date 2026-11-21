@@ -14,6 +14,22 @@ const { generateOTP } = require('../utils/generateOTP');
 
 const tests = [];
 const test = (name, run) => tests.push({ name, run });
+const apiBaseUrl = (process.env.API_BASE_URL || 'http://localhost:5000').replace(/\/+$/, '');
+
+const requestApi = async (path, options) => {
+  let response;
+  try {
+    response = await fetch(`${apiBaseUrl}${path}`, options);
+  } catch (error) {
+    throw new Error(
+      `Cannot reach the API at ${apiBaseUrl}. Start the server with "npm run dev" or set API_BASE_URL.`,
+      { cause: error }
+    );
+  }
+
+  const body = await response.json();
+  return { response, body };
+};
 
 const createResponse = () => ({
   statusCode: undefined,
@@ -82,6 +98,41 @@ const originalEnv = {
   EMAIL_PASS: process.env.EMAIL_PASS,
 };
 process.env.JWT_SECRET = 'local-test-secret';
+
+test('running API responds to its health route', async () => {
+  const { response, body } = await requestApi('/');
+  assert.equal(response.status, 200);
+  assert.equal(body.success, true);
+});
+
+test('running API rejects invalid auth payloads before database or email work', async () => {
+  for (const [path, body] of [
+    ['/auth/register/send-otp', {}],
+    ['/auth/verify-otp', {}],
+    ['/auth/login', {}],
+  ]) {
+    const { response } = await requestApi(path, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    assert.equal(response.status, 400, `${path} should reject an empty body`);
+  }
+});
+
+test('running API protects the auth and user profile routes without a token', async () => {
+  for (const [path, method, body] of [
+    ['/auth/me', 'GET'],
+    ['/users/profile', 'PATCH', {}],
+  ]) {
+    const { response } = await requestApi(path, {
+      method,
+      headers: { 'content-type': 'application/json' },
+      ...(body === undefined ? {} : { body: JSON.stringify(body) }),
+    });
+    assert.equal(response.status, 401, `${method} ${path} should require authentication`);
+  }
+});
 
 const userId = '507f1f77bcf86cd799439011';
 const validAuthBodies = {
