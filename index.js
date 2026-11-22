@@ -24,7 +24,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(require("./middleware/blockOwnerRole"));
-// app.use("/api/users", require("./routes/user.routes"));
+app.use('/users', require('./routes/user.routes'));
+app.use('/auth', require('./routes/auth.routes'));
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -38,6 +39,7 @@ app.get('/', (req, res) => {
 // ==================== MOUNT ROUTES HERE ====================
 // Example: app.use('/api/auth', require('./routes/auth.routes'));
 // ===========================================================
+app.use('/api/v1/auth', require('./routes/auth.routes'));
 
 app.use(notFound);      // 404 handler
 app.use(errorHandler);  // must be last

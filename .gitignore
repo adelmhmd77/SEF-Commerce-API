@@ -16,3 +16,4 @@ Thumbs.db
 .idea/
 
 scripts/**
+!scripts/test.js
