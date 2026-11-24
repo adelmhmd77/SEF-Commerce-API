@@ -8,6 +8,12 @@ const updateProfileSchema = joi.object({
     'object.min' : 'Request body can not be empty'
 })
 
+const changePasswordSchema = joi.object({
+    currentPassword : joi.string().required(),
+    newPassword : joi.string().min(8).required(),
+})
+
 module.exports = {
-    updateProfileSchema
+    updateProfileSchema,
+    changePasswordSchema
 }
