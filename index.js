@@ -15,9 +15,6 @@ const { errorHandler, notFound } = require('./middleware/errorHandler');
 
 const app = express();
 
-// ---- Stripe webhook (Phase 4) ----
-// The webhook route needs the RAW body, so it MUST be mounted
-// BEFORE express.json() below.
 
 app.use(cors());
 app.use(express.json());
@@ -26,6 +23,7 @@ app.use(cookieParser());
 app.use(require("./middleware/blockOwnerRole"));
 app.use('/users', require('./routes/user.routes'));
 app.use('/auth', require('./routes/auth.routes'));
+app.use('/api/auth', require('./routes/auth.routes'));
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -36,10 +34,7 @@ app.get('/', (req, res) => {
   res.status(200).json({ success: true, message: 'SEF Commerce API is running' });
 });
 
-// ==================== MOUNT ROUTES HERE ====================
-// Example: app.use('/api/auth', require('./routes/auth.routes'));
-// ===========================================================
-app.use('/api/v1/auth', require('./routes/auth.routes'));
+app.use('/api/', require('./routes/auth.routes'));
 
 app.use(notFound);      // 404 handler
 app.use(errorHandler);  // must be last
