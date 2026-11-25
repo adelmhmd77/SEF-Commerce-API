@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-
 const validate = require('../middleware/validate');
 const { protect } = require('../middleware/auth.middleware');
 const { adminOnly } = require('../middleware/role.middleware');
@@ -11,7 +10,6 @@ const {
   forgotPasswordSendOtpSchema,
   forgotPasswordVerifyOtpSchema,
 } = require('../validation/auth.validation');
-
 const {
   login,
   sendRegisterOTP,
@@ -25,9 +23,7 @@ const {
 } = require('../controllers/auth.controller');
 
 router.post('/login', validate(loginSchema), login);
-
 router.post('/register/send-otp', validate(registerSchema), sendRegisterOTP);
-
 router.post('/verify-otp', validate(verifyOtpSchema), verifyRegisterOTP);
 router.post('/register/verify-otp', validate(verifyOtpSchema), verifyRegisterOTP);
 router.post(
@@ -35,13 +31,6 @@ router.post(
   validate(forgotPasswordSendOtpSchema),
   forgotPasswordSendOtp
 );
-router.post(
-  '/forgot-password/verify-otp',
-  validate(forgotPasswordVerifyOtpSchema),
-  forgotPasswordVerifyOtp
-);
-
-// Task 4B: Verify OTP and reset password
 router.post(
   '/forgot-password/verify-otp',
   validate(forgotPasswordVerifyOtpSchema),
