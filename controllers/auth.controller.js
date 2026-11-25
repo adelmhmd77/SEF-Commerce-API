@@ -275,8 +275,6 @@ const getMe = async (req, res, next) => {
   }
 };
 
-
-
 module.exports = {
   login,
   sendRegisterOTP,
@@ -286,5 +284,5 @@ module.exports = {
   changeRole,
   adminTest,
   getMe,
-  logout
+  logout,
 };
