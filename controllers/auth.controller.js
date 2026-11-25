@@ -163,6 +163,90 @@ const forgotPasswordSendOtp = async (req, res, next) => {
   }
 };
 
+const forgotPasswordVerifyOtp = async (req, res, next) => {
+  try {
+    const email = req.body.email.trim().toLowerCase();
+    const { otp, newPassword } = req.body;
+    const otpReset = await OTP.findOne({ email });
+
+    if (
+      !otpReset ||
+      otpReset.expiresAt <= new Date() ||
+      !(await bcrypt.compare(otp, otpReset.otp))
+    ) {
+      if (otpReset && otpReset.expiresAt <= new Date()) {
+        await OTP.deleteOne({ _id: otpReset._id });
+      }
+
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid or expired OTP',
+      });
+    }
+
+    const user = await User.findOne({ email, isVerified: true }).select('+password');
+    if (!user) {
+      await OTP.deleteOne({ _id: otpReset._id });
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid or expired OTP',
+      });
+    }
+
+    user.password = newPassword;
+    await user.save();
+    await OTP.deleteOne({ _id: otpReset._id });
+
+    return res.status(200).json({
+      success: true,
+      message: 'Password reset successfully',
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+const changeRole = async (req, res, next) => {
+  try {
+    if (req.user.role === 'owner') {
+      return res.status(403).json({
+        success: false,
+        message: 'Owner account cannot be modified',
+      });
+    }
+
+    const requestedRole = String(req.body?.role || req.query?.role || '').trim().toLowerCase();
+    const role = requestedRole || (req.user.role === 'admin' ? 'customer' : 'admin');
+
+    if (!['customer', 'admin'].includes(role)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid role',
+      });
+    }
+
+    req.user.role = role;
+    await req.user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: 'Role changed successfully',
+      user: {
+        _id: req.user._id,
+        role: req.user.role,
+      },
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+const adminTest = async (req, res) => {
+  return res.status(200).json({
+    success: true,
+    message: 'Admin access granted',
+  });
+};
 
 const logout = async (req, res, next) => {
   try {
@@ -198,6 +282,9 @@ module.exports = {
   sendRegisterOTP,
   verifyRegisterOTP,
   forgotPasswordSendOtp,
+  forgotPasswordVerifyOtp,
+  changeRole,
+  adminTest,
   getMe,
   logout
 };
