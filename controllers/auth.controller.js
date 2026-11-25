@@ -163,67 +163,89 @@ const forgotPasswordSendOtp = async (req, res, next) => {
   }
 };
 
-// Task 4B: Verify OTP and reset password
 const forgotPasswordVerifyOtp = async (req, res, next) => {
   try {
     const email = req.body.email.trim().toLowerCase();
     const { otp, newPassword } = req.body;
+    const otpReset = await OTP.findOne({ email });
 
-    // 1. Find OTP document using email
-    const otpDoc = await OTP.findOne({ email });
+    if (
+      !otpReset ||
+      otpReset.expiresAt <= new Date() ||
+      !(await bcrypt.compare(otp, otpReset.otp))
+    ) {
+      if (otpReset && otpReset.expiresAt <= new Date()) {
+        await OTP.deleteOne({ _id: otpReset._id });
+      }
 
-    // 2. Check if OTP exists
-    if (!otpDoc) {
       return res.status(400).json({
+        success: false,
         message: 'Invalid or expired OTP',
       });
     }
 
-    // 3. Check if OTP is expired
-    const expiresAt = otpDoc.expiresAt
-      ? new Date(otpDoc.expiresAt).getTime()
-      : NaN;
-
-    if (!Number.isFinite(expiresAt) || expiresAt <= Date.now()) {
-      return res.status(400).json({
-        message: 'Invalid or expired OTP',
-      });
-    }
-
-    // 4. Compare entered OTP with stored hash
-    const isMatch = await bcrypt.compare(String(otp), otpDoc.otp);
-
-    if (!isMatch) {
-      return res.status(400).json({
-        message: 'Invalid or expired OTP',
-      });
-    }
-
-    // 5. Find user
-    const user = await User.findOne({ email });
-
+    const user = await User.findOne({ email, isVerified: true }).select('+password');
     if (!user) {
-      return res.status(404).json({
-        message: 'User not found',
+      await OTP.deleteOne({ _id: otpReset._id });
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid or expired OTP',
       });
     }
 
-    // 6. Update password
     user.password = newPassword;
-
-    // 7. Save user to trigger the pre-save hashing hook
     await user.save();
+    await OTP.deleteOne({ _id: otpReset._id });
 
-    // 8. Delete used OTP
-    await OTP.deleteOne({ _id: otpDoc._id });
-
-    // 9. Return success response
     return res.status(200).json({
+      success: true,
       message: 'Password reset successfully',
     });
   } catch (error) {
     return next(error);
   }
+};
+
+const changeRole = async (req, res, next) => {
+  try {
+    if (req.user.role === 'owner') {
+      return res.status(403).json({
+        success: false,
+        message: 'Owner account cannot be modified',
+      });
+    }
+
+    const requestedRole = String(req.body?.role || req.query?.role || '').trim().toLowerCase();
+    const role = requestedRole || (req.user.role === 'admin' ? 'customer' : 'admin');
+
+    if (!['customer', 'admin'].includes(role)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid role',
+      });
+    }
+
+    req.user.role = role;
+    await req.user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: 'Role changed successfully',
+      user: {
+        _id: req.user._id,
+        role: req.user.role,
+      },
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+const adminTest = async (req, res) => {
+  return res.status(200).json({
+    success: true,
+    message: 'Admin access granted',
+  });
 };
 
 const logout = async (req, res, next) => {
@@ -259,6 +281,8 @@ module.exports = {
   verifyRegisterOTP,
   forgotPasswordSendOtp,
   forgotPasswordVerifyOtp,
+  changeRole,
+  adminTest,
   getMe,
   logout,
 };
