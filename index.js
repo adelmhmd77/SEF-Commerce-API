@@ -13,6 +13,7 @@ const { errorHandler, notFound } = require('./middleware/errorHandler');
 
 const app = express();
 
+
 app.use(cors());
 
 // Stripe webhook must receive the raw body before express.json().
@@ -30,6 +31,7 @@ app.use(require('./middleware/blockOwnerRole'));
 
 app.use('/users', require('./routes/user.routes'));
 app.use('/auth', require('./routes/auth.routes'));
+app.use('/api/auth', require('./routes/auth.routes'));
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -45,6 +47,7 @@ app.get('/', (req, res) => {
 
 // Existing API authentication route.
 app.use('/api/v1/auth', require('./routes/auth.routes'));
+app.use('/api/', require('./routes/auth.routes'));
 
 // Stripe payment routes.
 app.use('/payments', require('./routes/payment.routes'));
