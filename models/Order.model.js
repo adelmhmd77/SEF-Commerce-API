@@ -5,6 +5,7 @@ const { Schema } = mongoose;
 // The allowed order statuses used by the admin status-update endpoint.
 const ORDER_STATUSES = [
   'pending',
+  'confirmed',
   'processing',
   'shipped',
   'delivered',
@@ -13,7 +14,7 @@ const ORDER_STATUSES = [
 ];
 
 // The allowed payment methods and payment statuses.
-const PAYMENT_METHODS = ['cash', 'card'];
+const PAYMENT_METHODS = ['cash', 'card', 'stripe'];
 const PAYMENT_STATUSES = ['pending', 'paid', 'failed', 'refunded'];
 
 const orderItemSchema = new Schema(
@@ -99,13 +100,13 @@ const shippingAddressSchema = new Schema(
     },
   },
 
-  // The shipping address is embedded inside the order and does not need its own _id.
+  // The shipping address is embedded inside the order.
   { _id: false }
 );
 
 const orderSchema = new Schema(
   {
-    // The user who placed the order; indexed for fast user-order lookups.
+    // The user who placed the order.
     user: {
       type: Schema.Types.ObjectId,
       ref: 'User',
@@ -123,13 +124,13 @@ const orderSchema = new Schema(
       },
     },
 
-    // Required shipping details are captured as a snapshot on the order.
+    // Required shipping details are captured as a snapshot.
     shippingAddress: {
       type: shippingAddressSchema,
       required: [true, 'Shipping address is required'],
     },
 
-    // These amounts are stored by the controller; their calculation belongs to Phase 4.
+    // These amounts are stored by the controller.
     subtotal: {
       type: Number,
       default: 0,
@@ -160,7 +161,12 @@ const orderSchema = new Schema(
       min: [0, 'Total price cannot be negative'],
     },
 
-    // Optional cash-on-delivery fee;
+    // Set when Stripe confirms that the payment succeeded.
+    paidAt: {
+      type: Date,
+    },
+
+    // Optional cash-on-delivery fee.
     codFee: {
       type: Number,
       default: 0,
@@ -189,7 +195,7 @@ const orderSchema = new Schema(
       default: 'pending',
     },
 
-    // Used to identify the payment transaction, especially for online payments.
+    // Stripe PaymentIntent ID.
     transactionId: {
       type: String,
       trim: true,
@@ -201,7 +207,7 @@ const orderSchema = new Schema(
   { timestamps: true }
 );
 
-// Pricing is calculated by the order controller in Phase 4, not by this model:
+// Pricing is calculated by the order controller in Phase 4:
 // - shippingFee = 0 when subtotal >= 1000 EGP; otherwise shippingFee = 50 EGP.
 // - tax = 14% of subtotal.
 // - codFee = COD fee when paymentMethod is cash; otherwise 0.

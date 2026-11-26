@@ -1,8 +1,7 @@
-
 require('dotenv').config(); // must be first
 
-const dns = require("node:dns");
-dns.setServers(["1.1.1.1", "8.8.8.8", "8.8.4.4"]);
+const dns = require('node:dns');
+dns.setServers(['1.1.1.1', '8.8.8.8', '8.8.8.8']);
 
 const express = require('express');
 const cors = require('cors');
@@ -10,17 +9,26 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 
 const connectDB = require('./DB/connection');
-
 const { errorHandler, notFound } = require('./middleware/errorHandler');
 
 const app = express();
 
 
 app.use(cors());
+
+// Stripe webhook must receive the raw body before express.json().
+app.use(
+  '/payments/webhook',
+  express.raw({ type: 'application/json' })
+);
+
+// Parse JSON requests after the Stripe webhook raw-body middleware.
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(require("./middleware/blockOwnerRole"));
+
+app.use(require('./middleware/blockOwnerRole'));
+
 app.use('/users', require('./routes/user.routes'));
 app.use('/auth', require('./routes/auth.routes'));
 app.use('/api/auth', require('./routes/auth.routes'));
@@ -29,21 +37,32 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-// Health route
+// Health route.
 app.get('/', (req, res) => {
-  res.status(200).json({ success: true, message: 'SEF Commerce API is running' });
+  res.status(200).json({
+    success: true,
+    message: 'SEF Commerce API is running',
+  });
 });
 
+// Existing API authentication route.
+app.use('/api/v1/auth', require('./routes/auth.routes'));
 app.use('/api/', require('./routes/auth.routes'));
 
-app.use(notFound);      // 404 handler
-app.use(errorHandler);  // must be last
+// Stripe payment routes.
+app.use('/payments', require('./routes/payment.routes'));
+
+app.use(notFound); // 404 handler must be after all routes.
+app.use(errorHandler); // Global error handler must be last.
 
 const PORT = process.env.PORT || 5000;
 
 const start = async () => {
   await connectDB();
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 };
 
 start();
