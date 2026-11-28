@@ -34,7 +34,10 @@ app.get('/', (req, res) => {
   res.status(200).json({ success: true, message: 'SEF Commerce API is running' });
 });
 
+
+
 app.use('/api/', require('./routes/auth.routes'));
+app.use('/orders', require('./routes/order.routes'));
 
 app.use(notFound);      // 404 handler
 app.use(errorHandler);  // must be last
