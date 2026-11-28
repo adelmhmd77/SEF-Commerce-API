@@ -47,3 +47,38 @@ exports.updateUserRole = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.updateProfile = async (req, res, next) =>{
+  try{
+
+    const allowedUpdates = ['username', 'phone', 'avatar']
+    const updates = {}
+
+    allowedUpdates.forEach((field) => {
+      if(req.body[field] !== undefined){
+        updates[field] = req.body[field]
+      }
+    })
+
+    const updateUser = await User.findByIdAndUpdate(
+      req.user.id,
+      {$set : updates},
+      {new : true, runValidators : true}
+    ).select('-password')
+
+    if(!updateUser){
+      return res.status(404).json({
+        succes: false, 
+        message: 'User not found'
+      })
+    }
+
+    res.status(200).json({
+      success : true, 
+      data : updateUser
+    })
+
+  }catch(err){
+    next(err)
+  }
+};
